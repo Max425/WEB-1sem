@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en" class="h-100">
+<head>
+    <meta charset="utf-8">
+
+    <title>Sticky Footer Navbar Template · Bootstrap v5.3</title>
+    <link href="../static/css/bootstrap.css" rel="stylesheet" crossorigin="anonymous">
+
+    <!— Custom styles for this template —>
+    <link href="../static/css/my.css" rel="stylesheet">
+</head>
+<body class="d-flex flex-column h-100">
+
+<header>
+    <!— Fixed navbar —>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <div class="container-fluid">
+            <h2><a class="navbar-brand" href="index.html">AskSikanov</a></h2>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="mini-avatar">
+                    <img src="../static/img/photo.png" alt="avatar">
+                </div>
+                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="settings.html">Dr. Paper</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="settings.html">settings</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">log out</a>
+                    </li>
+                </ul>
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<!— Begin page content —>
+<main class="flex-shrink-0">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-9">
+
+                <div class="main-question">
+                    <div class="row">
+                        <div class="col-3">
+                            <div class="max-avatar">
+                                <img src="../static/img/photo.png" alt="avatar">
+                            </div>
+                            <div class="counter">
+                                <button class="counter-btn" data-action="decrement">-</button>
+                                <input class="counter-input" type="text" value="1">
+                                <button class="counter-btn" data-action="increment">+</button>
+                            </div>
+                        </div>
+                        <div class="col-9">
+                            <h2>Awesome question 1</h2>
+                            <div class="answer-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</div>
+                            <div class="row">
+                                <div class="col-8">
+                                    Tags: <a href="tag.html">black_jack</a>, <a href="tag.html">black_jack</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr class="bg-dark">
+                <div class="question">
+                    <div class="row">
+                        <div class="col-3">
+                            <div class="question-avatar">
+                                <img src="../static/img/photo1.png" alt="avatar">
+                            </div>
+                            <div class="counter">
+                                <button class="counter-btn" data-action="decrement">-</button>
+                                <input class="counter-input" type="text" value="1">
+                                <button class="counter-btn" data-action="increment">+</button>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="answer-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                <label class="form-check-label" for="defaultCheck1">
+                                    Correct!
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="question">
+                    <div class="row">
+                        <div class="col-3">
+                            <div class="question-avatar">
+                                <img src="../static/img/photo2.png" alt="avatar">
+                            </div>
+                            <div class="counter">
+                                <button class="counter-btn" data-action="decrement">-</button>
+                                <input class="counter-input" type="text" value="1">
+                                <button class="counter-btn" data-action="increment">+</button>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="answer-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
+                                <label class="form-check-label" for="defaultCheck1">
+                                    Correct!
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr class="bg-dark">
+                <div class="form-group">
+                    <textarea class="form-control question w-100" placeholder="Enter your answer here"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Answer</button>
+            </div>
+            <div class="col-3">
+                <div>
+                    <div>
+                        <h2>Popular Tags</h2>
+                        <div>
+                            <a href="tag.html">tag1</a>,
+                            <a href="tag.html">tag2</a>,
+                            <a href="tag.html">tag3</a>,
+                        </div>
+                    </div>
+                    <div>
+                        <h2>Best Members</h2>
+                        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                            <li><a href="#">Dr. Paper</a></li>
+                            <li><a href="#">Dr. Qaper</a></li>
+                            <li><a href="#">Dr. Aaper</a></li>
+                            <li><a href="#">Dr. Daper</a></li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer class="footer mt-auto py-3 bg-light">
+    <div class="container">
+        <span class="text-muted">Place sticky footer content here.</span>
+    </div>
+</footer>
+
+<script src="/docs/5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+</body>
+</html>
