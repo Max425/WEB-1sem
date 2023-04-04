@@ -3,18 +3,14 @@
 {% block content %}
 <div class="col-9">
     <h1 class="mt-5">New question</h1>
-    <div class="input-group" style="white-space: nowrap;">
-        <strong><label for="title-input" style="margin-right: 20px;">Title</label></strong>
-        <textarea id="title-input" class="form-control ask-input" type="text" placeholder="Enter your title here"></textarea>
+    {% include "inc/input_form.html" with input_name="Title" style="placeholder='Enter your title here'" %}
+    <div class="form-group row">
+        <label for="input1" class="col-sm-2 col-form-label"> Text </label>
+        <div class="col-sm-10">
+            <textarea id="ask-input" class="form-control question" type="text" placeholder="Enter your title here"></textarea>
+        </div>
     </div>
-    <div class="input-group" style="white-space: nowrap;">
-        <strong><label for="title-input" style="margin-right: 22px;">Text</label></strong>
-        <textarea id="ask-input" class="form-control question" type="text" placeholder="Enter your title here"></textarea>
-    </div>
-    <div class="input-group" style="white-space: nowrap;">
-        <strong><label for="title-input" style="margin-right: 20px;">Tags</label></strong>
-        <textarea id="tag-input" class="form-control ask-input" type="text" placeholder="Enter your tags here"></textarea>
-    </div>
+    {% include "inc/input_form.html" with input_name="Tags" style="placeholder='Enter your tags here'" %}
     <button type="submit" class="btn btn-primary">Ask</button>
 </div>
 {% endblock content %}

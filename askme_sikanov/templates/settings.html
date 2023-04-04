@@ -5,25 +5,9 @@
 <h1 class="mt-5">Settings: Dr. Pepper</h1>
 <div class="container">
     <form>
-        <div class="form-group row">
-            <label for="input1" class="col-sm-2 col-form-label">Login</label>
-            <div class="col-sm-10">
-                <input id="login-input" class="form-control ask-input" type="text" value="Dr_Pepper">
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="input2" class="col-sm-2 col-form-label">Email</label>
-            <div class="col-sm-10">
-                <input id="email-input" class="form-control ask-input" type="text" value="max@yandex.ru">
-
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="input3" class="col-sm-2 col-form-label">NickName</label>
-            <div class="col-sm-10">
-                <input id="login-input" class="form-control ask-input" type="text" value="Dr_Pepper">
-            </div>
-        </div>
+        {%  include "inc/input_form.html" with input_name="Login" style="value=Dr_Pepper" %}
+        {%  include "inc/input_form.html" with input_name="Email" style="value=max@vk.com" %}
+        {%  include "inc/input_form.html" with input_name="NickName" style="value=Dr. Puper" %}
         <div class="form-group row">
             <label for="input3" class="col-sm-2 col-form-label">Avatar</label>
             <div class="col-sm-10 question-avatar">

@@ -28,6 +28,11 @@ def signup(request):
     return render(request, 'signup.html')
 
 
-def tag(request):
-    context = {'questions': models.QUESTIONS}
+def tag(request, tag_name):
+    context = {'tag': tag_name,'questions': models.QUESTIONS}
     return render(request, 'tag.html', context)
+
+
+def hot(request):
+    context = {'questions': models.QUESTIONS}
+    return render(request, 'hot.html', context)

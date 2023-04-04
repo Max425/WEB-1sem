@@ -4,37 +4,11 @@
 <h1 class="mt-5">Sign Up</h1>
 <div class="container">
     <form>
-        <div class="form-group row">
-            <label for="input1" class="col-sm-2 col-form-label">Login</label>
-            <div class="col-sm-10">
-                <input id="login-input" class="form-control ask-input" type="text" placeholder="Enter your login">
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="input2" class="col-sm-2 col-form-label">Email</label>
-            <div class="col-sm-10">
-                <input id="email-input" class="form-control ask-input" type="text" placeholder="Enter your email">
-
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="input3" class="col-sm-2 col-form-label">NickName</label>
-            <div class="col-sm-10">
-                <input id="login-input" class="form-control ask-input" type="text" placeholder="Enter your nickname">
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="input3" class="col-sm-2 col-form-label">Password</label>
-            <div class="col-sm-10">
-                <input id="login-input" class="form-control ask-input" type="text" placeholder="Enter your password">
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="input3" class="col-sm-2 col-form-label">Repeat password</label>
-            <div class="col-sm-10">
-                <input id="login-input" class="form-control ask-input" type="text" placeholder="Repeat your password">
-            </div>
-        </div>
+        {%  include "inc/input_form.html" with input_name="Login" style="placeholder='Enter your login'" %}
+        {%  include "inc/input_form.html" with input_name="Email" style="placeholder='Enter your email'" %}
+        {%  include "inc/input_form.html" with input_name="NickName" style="placeholder='Enter your nickname'" %}
+        {%  include "inc/input_form.html" with input_name="Password" style="placeholder='Enter your password'" %}
+        {%  include "inc/input_form.html" with input_name="Repeat password" style="placeholder='Repeat your password'" %}
         <div class="form-group row">
             <label for="input3" class="col-sm-2 col-form-label">Upload avatar</label>
             <div class="col-sm-10 question-avatar">

@@ -10,5 +10,6 @@ urlpatterns = [
     path('login/', views.login, name="login"),
     path('settings/', views.settings, name="settings"),
     path('signup/', views.signup, name="signup"),
-    path('tag/', views.tag, name="tag"),
+    path('tag/<str:tag_name>/', views.tag, name="tag"),
+    path('hot/', views.hot, name="hot"),
 ]

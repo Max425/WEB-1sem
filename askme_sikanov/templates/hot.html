@@ -1,10 +1,8 @@
 {% extends "inc/base.html" %}
 
 {% block content %}
-<div>
-    <h1 style="display: inline-block;" class="mt-5">New questions</h1>
-    <a href="{% url "hot" %}">Hot Qiestions</a>
-</div>
+
+<h1 class="mt-5">Hot questions</h1>
 {% for question in questions %}
     {% include "inc/question_item.html" %}
 {% endfor %}

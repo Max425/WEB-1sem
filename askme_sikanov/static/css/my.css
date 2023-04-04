@@ -31,6 +31,14 @@ main > .container {
     border-radius: 50%;
 }
 
+.my-input {
+    height: 50px;
+    border: 12px solid red;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
 .question-text {
     margin-bottom: 5%;
     height: 70px;
