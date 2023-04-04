@@ -1,14 +1,30 @@
 from . import models
+from django.core.paginator import Paginator
 from django.shortcuts import render
 
 
 def index(request):
-    context = {'questions': models.QUESTIONS}
+    questions_list = models.QUESTIONS
+    paginator = Paginator(questions_list, 10)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    context = {
+        'page_obj': page_obj,
+        'questions': models.QUESTIONS,
+    }
     return render(request, 'index.html', context)
 
 
 def question(request, question_id):
-    context = {'question': models.QUESTIONS[question_id], 'answers' : models.ANSWERS}
+    answer_list = models.QUESTIONS
+    paginator = Paginator(answer_list, 10)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    context = {
+        'page_obj': page_obj,
+        'answers': models.ANSWERS,
+        'question': models.QUESTIONS[question_id],
+    }
     return render(request, 'question.html', context)
 
 
@@ -29,10 +45,25 @@ def signup(request):
 
 
 def tag(request, tag_name):
-    context = {'tag': tag_name,'questions': models.QUESTIONS}
+    tag_questions_list = models.QUESTIONS
+    paginator = Paginator(tag_questions_list, 10)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    context = {
+        'page_obj': page_obj,
+        'tag': tag_name,
+        'questions': models.QUESTIONS
+    }
     return render(request, 'tag.html', context)
 
 
 def hot(request):
-    context = {'questions': models.QUESTIONS}
+    hot_questions_list = models.QUESTIONS
+    paginator = Paginator(hot_questions_list, 10)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    context = {
+        'page_obj': page_obj,
+        'questions': models.QUESTIONS,
+    }
     return render(request, 'hot.html', context)

@@ -5,7 +5,11 @@
     <h1 style="display: inline-block;" class="mt-5">New questions</h1>
     <a href="{% url "hot" %}">Hot Qiestions</a>
 </div>
-{% for question in questions %}
+{% for question in page_obj %}
     {% include "inc/question_item.html" %}
 {% endfor %}
+
+{% include "inc/paginator.html" with obj=page_obj %}
+
 {% endblock content %}
+

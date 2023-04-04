@@ -4,7 +4,7 @@
 <div class="col-9">
     {% include "inc/question_item.html" %}
     <hr class="bg-dark">
-    {% for answer in answers %}
+    {% for answer in page_obj %}
         {% include "inc/answer_item.html" %}
     {% endfor %}
 
@@ -14,4 +14,7 @@
     </div>
     <button type="submit" class="btn btn-primary">Answer</button>
 </div>
+
+{% include "inc/paginator.html" with obj=page_obj %}
+
 {% endblock content %}

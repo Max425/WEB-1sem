@@ -3,7 +3,10 @@
 {% block content %}
 
 <h1 class="mt-5">Tag: {{tag}} </h1>
-{% for question in questions %}
+{% for question in page_obj %}
     {% include "inc/question_item.html" %}
 {% endfor %}
+
+{% include "inc/paginator.html" with obj=page_obj %}
+
 {% endblock content %}
