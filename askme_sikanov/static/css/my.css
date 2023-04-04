@@ -1,54 +1,66 @@
 main > .container {
     padding: 60px 15px 0;
-}
-
-.question {
+  }
+  
+  .question {
     height: 200px;
     border: 2px solid black;
     border-radius: 10px;
     padding: 10px;
     margin-bottom: 10px;
-}
-
-.mini-avatar {
+  }
+  
+  #my-input {
+    height: 50px;
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .mini-avatar {
     height: 50px;
     width: 50px;
-}
-.max-avatar {
+  }
+  
+  .max-avatar {
     height: 200px;
     width: 200px;
-}
-
-.question-avatar {
+  }
+  
+  .question-avatar {
     height: 130px;
     width: 130px;
-}
-
-.question-avatar > img, .mini-avatar > img, .max-avatar > img {
+  }
+  
+  .question-avatar > img,
+  .mini-avatar > img,
+  .max-avatar > img {
     height: 100%;
     width: 100%;
     object-fit: cover;
     border-radius: 50%;
-}
-
-.my-input {
+  }
+  
+  .my-input {
     height: 50px;
     border: 12px solid red;
     border-radius: 10px;
     padding: 10px;
     margin-bottom: 10px;
-}
-
-.question-text {
+  }
+  
+  .question-text {
     margin-bottom: 5%;
     height: 70px;
     overflow: auto;
-}
-.answer-text {
+  }
+  
+  .answer-text {
     margin-bottom: 5%;
-}
-
-.counter {
+  }
+  
+  .counter {
     margin-top: 5px;
     margin-left: 10px;
     display: flex;
@@ -57,9 +69,9 @@ main > .container {
     border: 1px solid #ccc;
     border-radius: 4px;
     overflow: hidden;
-}
-
-.counter-btn {
+  }
+  
+  .counter-btn {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -70,9 +82,9 @@ main > .container {
     border: none;
     outline: none;
     cursor: pointer;
-}
-
-.counter-input {
+  }
+  
+  .counter-input {
     height: 32px;
     width: 48px;
     text-align: center;
@@ -82,4 +94,5 @@ main > .container {
     font-weight: bold;
     background-color: #fff;
     color: #555;
-}
+  }
+  
