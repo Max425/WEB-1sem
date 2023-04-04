@@ -10,14 +10,6 @@ main > .container {
     margin-bottom: 10px;
 }
 
-.ask-input {
-    height: 50px;
-    border: 2px solid black;
-    border-radius: 10px;
-    padding: 10px;
-    margin-bottom: 10px;
-}
-
 .mini-avatar {
     height: 50px;
     width: 50px;

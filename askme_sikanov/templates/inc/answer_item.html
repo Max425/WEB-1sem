@@ -12,16 +12,13 @@
                 <button class="counter-btn" data-action="increment">+</button>
             </div>
         </div>
-        <div class="col-9">
-            <h2><a href="{% url "question" question.id %}">{{ question.title }}</a></h2>
-            <div class="question-text">{{ question.text }}</div>
-            <div class="row">
-                <div class="col-4">
-                    <a class="ans-href-with-count" href="{% url "question" question.id %}">answers(5)</a>
-                </div>
-                <div class="col-8">
-                    Tags: <a href="tag.html">black_jack</a>, <a href="tag.html">black_jack</a>
-                </div>
+        <div class="col-6">
+            <div class="answer-text">{{ answer.text }}</div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                <label class="form-check-label" for="defaultCheck1">
+                    Correct!
+                </label>
             </div>
         </div>
     </div>
