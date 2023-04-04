@@ -1,83 +1,11 @@
 {% extends "inc/base.html" %}
 
 {% block content %}
-            <h1 class="mt-5">New questions</h1>
-                <div class="question">
-                    <div class="row">
-                        <div class="col-3">
-                            <div class="question-avatar">
-                                <img src="../static/img/photo.png" alt="avatar">
-                            </div>
-                            <div class="counter">
-                                <button class="counter-btn" data-action="decrement">-</button>
-                                <input class="counter-input" type="text" value="1">
-                                <button class="counter-btn" data-action="increment">+</button>
-                            </div>
-                        </div>
-                        <div class="col-9">
-                            <h2><a href="question.html">Awesome question 1</a></h2>
-                            <div class="question-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</div>
-                            <div class="row">
-                                <div class="col-4">
-                                    Answers (3)
-                                </div>
-                                <div class="col-8">
-                                    Tags: <a href="tag.html">black_jack</a>, <a href="tag.html">black_jack</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="question">
-                    <div class="row">
-                        <div class="col-3">
-                            <div class="question-avatar">
-                                <img src="../static/img/photo1.png" alt="avatar">
-                            </div>
-                            <div class="counter">
-                                <button class="counter-btn" data-action="decrement">-</button>
-                                <input class="counter-input" type="text" value="1">
-                                <button class="counter-btn" data-action="increment">+</button>
-                            </div>
-                        </div>
-                        <div class="col-9">
-                            <h2><a href="question.html">Awesome question 2</a></h2>
-                            <div class="question-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</div>
-                            <div class="row">
-                                <div class="col-4">
-                                    Answers (3)
-                                </div>
-                                <div class="col-8">
-                                    Tags: <a href="tag.html">black_jack</a>, <a href="tag.html">black_jack</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="question">
-                    <div class="row">
-                        <div class="col-3">
-                            <div class="question-avatar">
-                                <img src="../static/img/photo2.png" alt="avatar">
-                            </div>
-                            <div class="counter">
-                                <button class="counter-btn" data-action="decrement">-</button>
-                                <input class="counter-input" type="text" value="1">
-                                <button class="counter-btn" data-action="increment">+</button>
-                            </div>
-                        </div>
-                        <div class="col-9">
-                            <h2><a href="question.html">Awesome question 3</a></h2>
-                            <div class="question-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</div>
-                            <div class="row">
-                                <div class="col-4">
-                                    Answers (3)
-                                </div>
-                                <div class="col-8">
-                                    Tags: <a href="tag.html">black_jack</a>, <a href="tag.html">black_jack</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<div>
+    <h1 style="display: inline-block;" class="mt-5">New questions</h1>
+    <a href="hot">Hot Qiestion</a>
+</div>
+{% for question in questions %}
+    {% include "inc/question_item.html" %}
+{% endfor %}
 {% endblock content %}

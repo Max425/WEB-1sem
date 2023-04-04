@@ -1,0 +1,28 @@
+{% load static %}
+
+<div class="question">
+    <div class="row">
+        <div class="col-3">
+            <div class="question-avatar">
+                <img src="{% static "img/photo.png" %}" alt="avatar">
+            </div>
+            <div class="counter">
+                <button class="counter-btn" data-action="decrement">-</button>
+                <input class="counter-input" type="text" value="1">
+                <button class="counter-btn" data-action="increment">+</button>
+            </div>
+        </div>
+        <div class="col-9">
+            <h2><a href="question.html">{{ question.title }}</a></h2>
+            <div class="question-text">{{ question.text }}</div>
+            <div class="row">
+                <div class="col-4">
+                    Answers (3)
+                </div>
+                <div class="col-8">
+                    Tags: <a href="tag.html">black_jack</a>, <a href="tag.html">black_jack</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

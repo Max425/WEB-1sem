@@ -1,8 +1,10 @@
+from . import models
 from django.shortcuts import render
 
 
 def index(request):
-    return render(request, 'index.html')
+    context = {'questions': models.QUESTIONS}
+    return render(request, 'index.html', context)
 
 
 def question(request):
