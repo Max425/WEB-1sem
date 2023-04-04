@@ -1,6 +1,7 @@
 from . import models
 from django.core.paginator import Paginator
 from django.shortcuts import render
+from django.http import Http404
 
 
 def index(request):
@@ -16,14 +17,19 @@ def index(request):
 
 
 def question(request, question_id):
-    answer_list = models.QUESTIONS
+    try:
+        question = models.QUESTIONS[int(question_id)]
+    except IndexError:
+        return Http404("does not exist")
+
+    answer_list = models.ANSWERS
     paginator = Paginator(answer_list, 10)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     context = {
         'page_obj': page_obj,
         'answers': models.ANSWERS,
-        'question': models.QUESTIONS[question_id],
+        'question': question,
     }
     return render(request, 'question.html', context)
 
