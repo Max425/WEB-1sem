@@ -7,7 +7,7 @@ from django.http import Http404
 def index(request):
     questions_list = models.QUESTIONS
     paginator = Paginator(questions_list, 10)
-    page_number = request.GET.get('page')
+    page_number = request.GET.get('page')#вынети
     page_obj = paginator.get_page(page_number)
     context = {
         'page_obj': page_obj,
