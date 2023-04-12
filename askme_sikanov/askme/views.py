@@ -10,20 +10,20 @@ def paginator(request, model, count):
 
 def index(request):
     context = {
-        'page_obj': paginator(request, models.QUESTIONS, 10),
-        'questions': models.QUESTIONS,
+        'page_obj': paginator(request, models.Question.objects.all(), 10),
+        'questions': models.Question.objects.all(),
     }
     return render(request, 'index.html', context)
 
 
 def question(request, question_id):
     try:
-        question = models.QUESTIONS[int(question_id)]
+        question = models.Question.objects.all()[int(question_id)]
     except IndexError:
         return Http404("does not exist")
 
     context = {
-        'page_obj': paginator(request, models.ANSWERS, 10),
+        'page_obj': paginator(request, models.Answer.objects.all(), 10),
         'answers': models.ANSWERS,
         'question': question,
     }
@@ -32,17 +32,17 @@ def question(request, question_id):
 
 def tag(request, tag_name):
     context = {
-        'page_obj': paginator(request, models.QUESTIONS, 10),
+        'page_obj': paginator(request, models.Question.objects.all(), 10),
         'tag': tag_name,
-        'questions': models.QUESTIONS
+        'questions': models.Question.objects.all()
     }
     return render(request, 'tag.html', context)
 
 
 def hot(request):
     context = {
-        'page_obj': paginator(request, models.QUESTIONS, 10),
-        'questions': models.QUESTIONS,
+        'page_obj': paginator(request, models.Question.objects.all(), 10),
+        'questions': models.Question.objects.all(),
     }
     return render(request, 'hot.html', context)
 
