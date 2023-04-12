@@ -9,7 +9,6 @@ from django.contrib.contenttypes.fields import GenericForeignKey
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    nickname = models.CharField(max_length=255)
     avatar = models.ImageField(upload_to='../static/css/img/', default='photo.png')
 
 
