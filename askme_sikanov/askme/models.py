@@ -1,3 +1,6 @@
+from datetime import timezone
+import datetime
+from django.db.models import Count
 from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
@@ -7,11 +10,22 @@ from django.contrib.contenttypes.fields import GenericForeignKey
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     nickname = models.CharField(max_length=255)
-    avatar_url = models.URLField(max_length=255)
+    avatar = models.ImageField(upload_to='../static/css/img/', default='photo.png')
 
 
 class Tag(models.Model):
     name = models.CharField(max_length=255)
+
+
+class QuestionManager(models.Manager):
+    def get_best(self):
+        return self.annotate(num_likes=Count('likes')).filter(num_likes__gt=20)
+    
+    def get_new(self):
+        return self.filter(create_date__gte=timezone.now() - datetime.timedelta(days=7))
+    
+    def by_tag(self, tag_name):
+        return self.filter(tag__name=tag_name)
 
 
 class Question(models.Model):
