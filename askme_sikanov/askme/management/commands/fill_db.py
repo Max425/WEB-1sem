@@ -60,9 +60,13 @@ class Command(BaseCommand):
             question = Question(title=title, text=text, create_date=create_date, profile=profile)
             questions.append(question)
 
-        Question.objects.bulk_create(questions)
+        Question.objects.bulk_create(questions)###!!!!
         for i, question in enumerate(questions):
             question.tag.set(tags[i % ratio:ratio+i % ratio:1])
+            # for question in Question.objects.all():
+            #     random_tags = Tag.objects.order_by('?')[:10]
+            #     question.tag.clear()
+            #     question.tag.add(*random_tags)
 
         # Создаем ответы
         for i in range(ratio * 100):

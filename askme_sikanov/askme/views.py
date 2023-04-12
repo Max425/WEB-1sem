@@ -23,8 +23,8 @@ def question(request, question_id):
         return Http404("does not exist")
 
     context = {
-        'page_obj': paginator(request, models.Answer.objects.all(), 10),
-        'answers': models.ANSWERS,
+        'page_obj': paginator(request, models.Answer.objects.get_for_question(question_id), 10),
+        'answers': models.Answer.objects.get_for_question(question_id),
         'question': question,
     }
     return render(request, 'question.html', context)
@@ -32,17 +32,17 @@ def question(request, question_id):
 
 def tag(request, tag_name):
     context = {
-        'page_obj': paginator(request, models.Question.objects.all(), 10),
+        'page_obj': paginator(request, models.Question.objects.get_by_tag(tag_name), 10),
         'tag': tag_name,
-        'questions': models.Question.objects.all()
+        'questions': models.Question.objects.get_by_tag(tag_name)
     }
     return render(request, 'tag.html', context)
 
 
 def hot(request):
     context = {
-        'page_obj': paginator(request, models.Question.objects.all(), 10),
-        'questions': models.Question.objects.all(),
+        'page_obj': paginator(request, models.Question.objects.get_new(), 10),
+        'questions': models.Question.objects.get_new(),
     }
     return render(request, 'hot.html', context)
 

@@ -1,5 +1,4 @@
-from datetime import timezone
-import datetime
+from django.utils import timezone
 from django.db.models import Count
 from django.db import models
 from django.contrib.auth.models import User
@@ -24,9 +23,9 @@ class QuestionManager(models.Manager):
         return self.annotate(num_likes=Count('likes')).filter(num_likes__gt=20)
     
     def get_new(self):
-        return self.filter(create_date__gte=timezone.now() - datetime.timedelta(days=7))
+        return self.filter(create_date__gte=timezone.now() - timezone.timedelta(days=7))
     
-    def by_tag(self, tag_name):
+    def get_by_tag(self, tag_name):
         return self.filter(tag__name=tag_name)
 
 
@@ -36,6 +35,12 @@ class Question(models.Model):
     create_date = models.DateField()
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     tag = models.ManyToManyField(Tag)
+    objects = QuestionManager()
+
+
+class AnswerManager(models.Manager):
+    def get_for_question(self, question_id):
+        return self.filter(question=question_id)
 
 
 class Answer(models.Model):
@@ -44,6 +49,7 @@ class Answer(models.Model):
     create_date = models.DateField()
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    objects = AnswerManager()
 
 
 class Like(models.Model):
