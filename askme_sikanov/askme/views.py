@@ -1,3 +1,4 @@
+from django.db.models import Count
 from . import models
 from django.core.paginator import Paginator
 from django.shortcuts import render
@@ -10,21 +11,21 @@ def paginator(request, model, count):
 
 def index(request):
     context = {
-        'page_obj': paginator(request, models.Question.objects.all(), 10),
-        'questions': models.Question.objects.all(),
+        'page_obj': paginator(request, models.Question.objects.annotate(num_likes=Count('profile__likes')), 10),
+        'questions': models.Question.objects.annotate(num_likes=Count('profile__likes')),
     }
     return render(request, 'index.html', context)
 
 
 def question(request, question_id):
     try:
-        question = models.Question.objects.all()[int(question_id)]
+        question = models.Question.objects.annotate(num_likes=Count('profile__likes')).get(id=question_id)
     except IndexError:
         return Http404("does not exist")
 
     context = {
-        'page_obj': paginator(request, models.Answer.objects.get_for_question(question_id), 10),
-        'answers': models.Answer.objects.get_for_question(question_id),
+        'page_obj': paginator(request, models.Answer.objects.get_for_question(question_id).annotate(num_likes=Count('profile__likes')), 10),
+        'answers': models.Answer.objects.get_for_question(question_id).annotate(num_likes=Count('profile__likes')),
         'question': question,
     }
     return render(request, 'question.html', context)
@@ -32,17 +33,17 @@ def question(request, question_id):
 
 def tag(request, tag_name):
     context = {
-        'page_obj': paginator(request, models.Question.objects.get_by_tag(tag_name), 10),
+        'page_obj': paginator(request, models.Question.objects.get_by_tag(tag_name).annotate(num_likes=Count('profile__likes')), 10),
         'tag': tag_name,
-        'questions': models.Question.objects.get_by_tag(tag_name)
+        'questions': models.Question.objects.get_by_tag(tag_name).annotate(num_likes=Count('profile__likes'))
     }
     return render(request, 'tag.html', context)
 
 
 def hot(request):
     context = {
-        'page_obj': paginator(request, models.Question.objects.get_new(), 10),
-        'questions': models.Question.objects.get_new(),
+        'page_obj': paginator(request, models.Question.objects.get_new().annotate(num_likes=Count('profile__likes')), 10),
+        'questions': models.Question.objects.get_new().annotate(num_likes=Count('profile__likes')),
     }
     return render(request, 'hot.html', context)
 
