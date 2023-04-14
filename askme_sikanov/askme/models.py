@@ -20,13 +20,16 @@ class Tag(models.Model):
 
 class QuestionManager(models.Manager):
     def get_best(self):
-        return self.annotate(num_likes=Count('likes')).filter(num_likes__gt=20)
+        return self.annotate(num_likes=Count('likes')).filter(num_likes__gt=20).annotate(num_likes=Count('profile__likes'))
     
     def get_new(self):
-        return self.filter(create_date__gte=timezone.now() - timezone.timedelta(days=7))
+        return self.filter(create_date__gte=timezone.now() - timezone.timedelta(days=7)).annotate(num_likes=Count('profile__likes'))
     
     def get_by_tag(self, tag_name):
-        return self.filter(tag__name=tag_name)
+        return self.filter(tag__name=tag_name).annotate(num_likes=Count('profile__likes'))
+    
+    def get_with_like(self):
+        return self.annotate(num_likes=Count('profile__likes')).order_by('-num_likes')
 
 
 class Question(models.Model):
@@ -40,7 +43,7 @@ class Question(models.Model):
 
 class AnswerManager(models.Manager):
     def get_for_question(self, question_id):
-        return self.filter(question=question_id)
+        return self.filter(question=question_id).annotate(num_likes=Count('profile__likes')).order_by('-num_likes')
 
 
 class Answer(models.Model):

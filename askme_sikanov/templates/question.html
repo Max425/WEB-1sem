@@ -1,19 +1,18 @@
 {% extends "inc/base.html" %}
 
 {% block content %}
-<div class="col-9">
-    {% include "inc/main_question_item.html" %}
-    <hr class="bg-dark">
-    {% for answer in page_obj %}
-        {% include "inc/answer_item.html" %}
-    {% endfor %}
+{% include "inc/main_question_item.html" %}
 
-    <hr class="bg-dark">
-    <div class="form-group">
-        <textarea class="form-control question w-100" placeholder="Enter your answer here"></textarea>
-    </div>
-    <button type="submit" class="btn btn-primary">Answer</button>
+<hr class="bg-dark">
+{% for answer in page_obj %}
+    {% include "inc/answer_item.html" %}
+{% endfor %}
+
+<hr class="bg-dark">
+<div class="form-group">
+    <textarea class="form-control question w-100" placeholder="Enter your answer here"></textarea>
 </div>
+<button type="submit" class="btn btn-primary">Answer</button>
 
 {% include "inc/paginator.html" with obj=page_obj %}
 

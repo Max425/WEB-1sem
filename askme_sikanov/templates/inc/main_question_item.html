@@ -1,6 +1,6 @@
 {% load static %}
 
-<div class="question" style="height: 220px;">
+<div class="question" style="height: auto;">
     <div class="row">
         <div class="col-3">
             <div class="question-avatar">
@@ -14,7 +14,7 @@
         </div>
         <div class="col-9">
             <h2>{{ question.title }}</h2>
-            <div class="question-text">{{ question.text }}</div>
+            <div class="question-text" style="height: auto;">{{ question.text }}</div>
             <div class="row">
                 <div class="col-8">
                     {% for tag in question.tag.all %}

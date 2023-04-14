@@ -1,6 +1,6 @@
 {% load static %}
 
-<div class="question">
+<div class="question" style="height: auto;">    
     <div class="row">
         <div class="col-3">
             <div class="question-avatar">
@@ -12,13 +12,13 @@
                 <button class="counter-btn" data-action="increment">+</button>
             </div>
         </div>
-        <div class="col-6">
+        <div class="col-9">
             <div class="answer-text">{{ answer.text }}</div>
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                <input class="form-check-input" type="checkbox" value="true" id="defaultCheck1" {% if answer.correct %}checked{% endif %}>
                 <label class="form-check-label" for="defaultCheck1">
                     Correct!
-                </label>
+                </label>                             
             </div>
         </div>
     </div>

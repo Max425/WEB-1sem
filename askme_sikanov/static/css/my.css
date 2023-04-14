@@ -3,11 +3,11 @@ main > .container {
   }
   
 .question {
-  height: 220px;
   border: 2px solid black;
   border-radius: 10px;
   padding: 10px;
   margin-bottom: 10px;
+  height: auto;
 }
 
 #my-input {
@@ -52,8 +52,6 @@ main > .container {
 
 .question-text {
   margin-bottom: 5%;
-  height: 70px;
-  overflow: auto;
 }
 
 .answer-text {

@@ -13,8 +13,8 @@
             </div>
         </div>
         <div class="col-9">
-            <h2><a href="{% url "question" question.id %}">{{ question.title }}</a></h2>
-            <div class="question-text">{{ question.text }}</div>
+            <h2><a href="{% url "question" question.id %}">{{ question.title|truncatechars:50 }}</a></h2>
+            <div class="question-text">{{ question.text|truncatechars:180 }}</div>
             <div class="row">
                 <div class="col-4">
                     <a class="ans-href-with-count" href="{% url "question" question.id %}">answers({{ question.answer_set.count }})</a>
