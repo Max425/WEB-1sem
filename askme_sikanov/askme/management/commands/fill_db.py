@@ -58,7 +58,7 @@ class Command(BaseCommand):
             text = f'Text {i} Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent euismod metus id turpis ultricies dapibus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque id lectus quam. Cras odio odio, accumsan dictum nisl et, fringilla fringilla urna. Nulla facilisi. \nPraesent quis tincidunt nisi, at ultricies nisl. Cras vel justo eget velit cursus pharetra in non nunc. Proin euismod commodo sem nec malesuada.Donec tempor ante lacus, et semper mi blandit ac. Vestibulum hendrerit nunc sit amet faucibus vulputate. \nNulla lectus nibh, congue nec tortor in, lacinia congue metus. Aliquam et ligula accumsan, dignissim ligula sit amet, pulvinar velit. In consequat.'
             create_date = now - timedelta(days=i)
             profile = profiles[i % ratio]
-            question = Question(title=title, text=text[:randint(10, len(text))], create_date=create_date, profile=profile)
+            question = Question(title=title, text=text[:randint(10, len(text))], create_date=create_date, profile=profile, like=randint(1,200))
             questions.append(question)
 
         Question.objects.bulk_create(questions)
@@ -73,7 +73,7 @@ class Command(BaseCommand):
             create_date = now - timedelta(days=i)
             profile = profiles[i % ratio]
             question = questions[randint(1,10000) % len(questions)]
-            answer = Answer(text=text[:randint(10, len(text))], correct=False, create_date=create_date, profile=profile, question=question)
+            answer = Answer(text=text[:randint(10, len(text))], correct=False, create_date=create_date, profile=profile, question=question, like=randint(1,200))
             answers.append(answer)
 
         Answer.objects.bulk_create(answers)

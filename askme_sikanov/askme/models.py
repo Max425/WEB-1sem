@@ -1,5 +1,4 @@
 from django.utils import timezone
-from django.db.models import Count
 from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
@@ -20,16 +19,16 @@ class Tag(models.Model):
 
 class QuestionManager(models.Manager):
     def get_best(self):
-        return self.annotate(num_likes=Count('likes')).filter(num_likes__gt=20).annotate(num_likes=Count('profile__likes'))
+        return self.filter(like__gt=20)
     
     def get_new(self):
-        return self.filter(create_date__gte=timezone.now() - timezone.timedelta(days=7)).annotate(num_likes=Count('profile__likes'))
+        return self.filter(create_date__gte=timezone.now() - timezone.timedelta(days=7))
+    
+    def get_hot(self):
+        return self.order_by('-like')
     
     def get_by_tag(self, tag_name):
-        return self.filter(tag__name=tag_name).annotate(num_likes=Count('profile__likes'))
-    
-    def get_with_like(self):
-        return self.annotate(num_likes=Count('profile__likes')).order_by('-num_likes')
+        return self.filter(tag__name=tag_name)
 
 
 class Question(models.Model):
@@ -39,11 +38,12 @@ class Question(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     tag = models.ManyToManyField(Tag)
     objects = QuestionManager()
+    like = models.IntegerField(default=0)
 
 
 class AnswerManager(models.Manager):
     def get_for_question(self, question_id):
-        return self.filter(question=question_id).annotate(num_likes=Count('profile__likes')).order_by('-num_likes')
+        return self.filter(question=question_id).order_by('-like')
 
 
 class Answer(models.Model):
@@ -53,6 +53,7 @@ class Answer(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     objects = AnswerManager()
+    like = models.IntegerField(default=0)
 
 
 class Like(models.Model):
