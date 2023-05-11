@@ -1,14 +1,19 @@
-from django.db.models import Count
 from . import models
 from django.core.paginator import Paginator
-from django.shortcuts import render
 from django.http import Http404
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
+# from askme.forms import LoginForm
+
 
 def paginator(request, model, count):
     pag = Paginator(model, count)
     page_number = request.GET.get('page')
     return pag.get_page(page_number)
 
+
+@login_required
 def index(request):
     objects = models.Question.objects.all()
     context = {
@@ -22,7 +27,7 @@ def question(request, question_id):
     try:
         question = models.Question.objects.get(id=question_id)
     except IndexError:
-        return Http404("does not exist")
+        raise Http404("does not exist")
 
     objects = models.Answer.objects.get_for_question(question_id)
     context = {
@@ -56,8 +61,21 @@ def ask(request):
     return render(request, 'ask.html')
 
 
-def login(request):
-    return render(request, 'login.html')
+# def login_view(request):
+#     if request.method == 'POST':
+#         login_form = LoginForm(request.POST)
+#         if login_form.is_valid():
+#             user = authenticate(request, **login_form.cleaned_data)
+#             if user is not None:
+#                 login(request, user)
+#                 return redirect('index')
+#             else:
+#                 login_form.add_error(None, 'Invalid login or password.')
+#     else:
+#         login_form = LoginForm()
+    
+#     return render(request, 'login.html', {'form': login_form})
+
 
 
 def settings(request):

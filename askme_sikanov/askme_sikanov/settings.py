@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
+    'bootstrap4',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
@@ -79,7 +80,7 @@ DATABASES = {
         'NAME': 'askme',
         'USER': 'postgres',
         'PASSWORD': '1474',
-        'HOST': '192.168.1.7',
+        'HOST': '192.168.137.1',
         'PORT': '5432',
     }
 }
@@ -127,3 +128,6 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+APPEND_SLASH = True
+LOGIN_URL = '/login'

@@ -1,16 +1,19 @@
 {% extends "inc/base.html" %}
+{% load bootstrap4 %}
+{% load static %}
 
 {% block content %}
 <h1 class="mt-5">Log In</h1>
 <div class="container">
-    <form>
-        {% include "inc/input_form.html" with input_name="Login" style="placeholder='Enter your login'" %}
-        {% include "inc/input_form.html" with input_name="Password" style="placeholder='Enter your password'" %}
-    </form>
-    <div>
-        <button type="submit" class="btn btn-primary" style="margin-top: 20px">Log In</button>
-        <label style="color: red">Sorry, wrong password</label>
-    </div>
-    <a href="signup.html">Create new account</a>
+  <form action="/login/" method="post">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    {% buttons %}
+      <button type="submit" class="btn btn-primary">
+        Submit
+      </button>
+    {% endbuttons %}
+  </form>
+  <a href="{% url "signup" %}">Create new account</a>
 </div>
 {% endblock content %}
