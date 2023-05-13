@@ -30,30 +30,24 @@ def question(request, question_id):
         raise Http404("does not exist")
     
     objects = models.Answer.objects.get_for_question(question_id)
-    if request.method == 'POST':
-        form = AnswerForm(request.POST)
-        if form.is_valid():
-            answer_text = form.cleaned_data['text']
-            answer = models.Answer.objects.create(
-                text=answer_text, question=question, correct=False, profile=request.user.profile)
-            context = {
-                'page_obj': paginator(request, objects, 10),
-                'answers': objects,
-                'question': question,
-                'form': form,
-                'flag': True
-            }
-            return render(request, 'question.html', context)
-    else:
-        form = AnswerForm()
-
     context = {
         'page_obj': paginator(request, objects, 10),
         'answers': objects,
         'question': question,
-        'form': form,
-        'flag': False
+        'form': AnswerForm()
     }
+    if request.method == 'POST':
+        form = AnswerForm(request.POST)
+        if form.is_valid():
+            context['form'] = form
+            answer_text = form.cleaned_data['text']
+            answer = models.Answer.objects.create(
+                text=answer_text, question=question, correct=False, profile=request.user.profile)
+            context['flag'] = True
+            return render(request, 'question.html', context)
+    else:
+        form = AnswerForm()
+
     return render(request, 'question.html', context)
 
 

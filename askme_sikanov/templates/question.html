@@ -26,4 +26,11 @@
         window.location.href = "{{ request.path }}?page={{ page_obj.paginator.num_pages }}";
     </script>
 {% endif %}
+
+{% if page_obj.number  ==  page_obj.paginator.num_pages %}
+<script>
+    window.scrollTo(0, document.body.scrollHeight);
+</script>
+{% endif %}
+
 {% endblock content %}

@@ -43,7 +43,7 @@ class Question(models.Model):
 
 class AnswerManager(models.Manager):
     def get_for_question(self, question_id):
-        return self.filter(question=question_id).order_by('-like')
+        return self.filter(question=question_id).order_by('-like', 'create_date')
 
 
 class Answer(models.Model):
