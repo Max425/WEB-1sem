@@ -1,16 +1,17 @@
 {% extends "inc/base.html" %}
+{% load bootstrap4 %}
 
 {% block content %}
 <div class="col-9">
     <h1 class="mt-5">New question</h1>
-    {% include "inc/input_form.html" with input_name="Title" style="placeholder='Enter your title here'" %}
-    <div class="form-group row">
-        <label for="input1" class="col-sm-2 col-form-label"> Text </label>
-        <div class="col-sm-10">
-            <textarea id="ask-input" class="form-control question" type="text" placeholder="Enter your title here"></textarea>
-        </div>
-    </div>
-    {% include "inc/input_form.html" with input_name="Tags" style="placeholder='Enter your tags here'" %}
-    <button type="submit" class="btn btn-primary">Ask</button>
+    <form method="post">
+        {% csrf_token %}
+        {% bootstrap_form form %}      
+        {% buttons %}
+        <button type="submit" class="btn btn-primary">
+          Ask!
+        </button>
+      {% endbuttons %}
+    </form>
 </div>
 {% endblock content %}

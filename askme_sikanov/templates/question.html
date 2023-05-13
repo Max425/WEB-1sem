@@ -1,4 +1,6 @@
 {% extends "inc/base.html" %}
+{% load bootstrap4 %}
+{% load static %}
 
 {% block content %}
 {% include "inc/main_question_item.html" %}
@@ -9,11 +11,19 @@
 {% endfor %}
 
 <hr class="bg-dark">
-<div class="form-group">
-    <textarea class="form-control question w-100" placeholder="Enter your answer here"></textarea>
-</div>
-<button type="submit" class="btn btn-primary">Answer</button>
+<form method="post" action="{% url 'question' question.pk %}">
+  {% csrf_token %}
+  <div class="form-group">
+    {% bootstrap_form form %}
+  </div>
+  <button type="submit" class="btn btn-primary">Answer</button>
+</form>
 
 {% include "inc/paginator.html" with obj=page_obj %}
 
+{% if flag %}
+    <script>
+        window.location.href = "{{ request.path }}?page={{ page_obj.paginator.num_pages }}";
+    </script>
+{% endif %}
 {% endblock content %}

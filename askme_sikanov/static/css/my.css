@@ -1,7 +1,8 @@
 main > .container {
     padding: 60px 15px 0;
-  }
-  
+}
+
+.answer,
 .question {
   border: 2px solid black;
   border-radius: 10px;

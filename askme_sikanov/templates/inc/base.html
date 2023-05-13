@@ -2,86 +2,105 @@
 
 <!doctype html>
 <html lang="en" class="h-100">
+
 <head>
     <meta charset="utf-8">
     <title>AskSikanov</title>
     <link rel="stylesheet" href="{% static "css/bootstrap.css" %}">
     <link rel="stylesheet" href="{% static "css/my.css" %}">
 </head>
+
 <body class="d-flex flex-column h-100">
 
-<header>
-    <!-- Fixed navbar -->
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <div class="container-fluid">
-            <h2><a class="navbar-brand" href="{% url "index" %}">AskSikanov</a></h2>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <div class="mini-avatar">
-                    <img src="{% static "img/photo.png" %}" alt="avatar">
+    <header>
+        <!-- Fixed navbar -->
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+            <div class="container-fluid">
+                <h2><a class="navbar-brand" href="{% url "index" %}">AskSikanov</a></h2>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                        {% if user.is_authenticated %}
+                        <li class="mini-avatar">
+                            <img src="{% static "img/photo.png" %}" alt="avatar">
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{% url "settings" %}">{{ user.username }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url "settings" %}">settings</a>
+                        </li>
+                        <li class="nav-item">
+                            <form id="logout-form" action="{% url 'logout' %}" method="post" style="display: none;">
+                                {% csrf_token %}
+                            </form>
+                            <a class="nav-link" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">log out</a>
+                        </li>
+                        {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url "login" %}">log in</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url "signup" %}">register</a>
+                        </li>
+                        {% endif %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url "ask" %}">ASK!</a>
+                        </li>
+                    </ul>
+                    <form class="d-flex" role="search"> 
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
                 </div>
-                <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{% url "settings" %}">Dr. Paper</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url "settings" %}">settings</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url "login" %}">log out</a>
-                    </li>
-                </ul>
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
             </div>
-        </div>
-    </nav>
-</header>
+        </nav>
+    </header>
 
-<!-- Begin page content -->
-<main class="flex-shrink-0">
-    <div class="container">
-        <div class="row"style="margin-top: 40px;">
-            <div class="col-9">
-                {% block content %}{% endblock content %}
-            </div>
-            <div class="col-3">
-                <div>
+    <!-- Begin page content -->
+    <main class="flex-shrink-0">
+        <div class="container">
+            <div class="row" style="margin-top: 40px;">
+                <div class="col-9">
+                    {% block content %}{% endblock content %}
+                </div>
+                <div class="col-3">
                     <div>
-                        <h2>Popular Tags</h2>
                         <div>
-                            <a href="{% url "tag" "tag1" %}">tag1</a>,
-                            <a href="{% url "tag" "tag2" %}">tag2</a>,
-                            <a href="{% url "tag" "tag3" %}">tag3</a>,
+                            <h2>Popular Tags</h2>
+                            <div>
+                                <a href="{% url "tag" "tag1" %}">tag1</a>,
+                                <a href="{% url "tag" "tag2" %}">tag2</a>,
+                                <a href="{% url "tag" "tag3" %}">tag3</a>,
+                            </div>
                         </div>
-                    </div>
-                    <div>
-                        <h2>Best Members</h2>
-                        <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                            <li><a href="#">Dr. Paper</a></li>
-                            <li><a href="#">Dr. Qaper</a></li>
-                            <li><a href="#">Dr. Aaper</a></li>
-                            <li><a href="#">Dr. Daper</a></li>
-                        </ul>
-                    </div>
+                        <div>
+                            <h2>Best Members</h2>
+                            <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                                <li><a href="#">Dr. Paper</a></li>
+                                <li><a href="#">Dr. Qaper</a></li>
+                                <li><a href="#">Dr. Aaper</a></li>
+                                <li><a href="#">Dr. Daper</a></li>
+                            </ul>
+                        </div>
 
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</main>
+    </main>
 
-<footer class="footer mt-auto py-3 bg-light">
-    <div class="container">
-        <a href="https://vk.com/little_strange">Autor</a>
-    </div>
-</footer>
+    <footer class="footer mt-auto py-3 bg-light">
+        <div class="container">
+            <a href="https://vk.com/little_strange">Autor</a>
+        </div>
+    </footer>
 
-<script src="{% static "js/bootstrap.bundle.min.js" %}"></script>
+    <script src="{% static "js/bootstrap.bundle.min.js" %}"></script>
 
 </body>
+
 </html>

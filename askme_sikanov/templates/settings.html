@@ -1,25 +1,16 @@
 {% extends "inc/base.html" %}
+{% load bootstrap4 %}
 {% load static %}
 
 {% block content %}
 <h1 class="mt-5">Settings: Dr. Pepper</h1>
 <div class="container">
-    <form>
-        {%  include "inc/input_form.html" with input_name="Login" style="value=Dr_Pepper" %}
-        {%  include "inc/input_form.html" with input_name="Email" style="value=max@vk.com" %}
-        {%  include "inc/input_form.html" with input_name="NickName" style="value=Dr. Puper" %}
-        <div class="form-group row">
-            <label for="input3" class="col-sm-2 col-form-label">Avatar</label>
-            <div class="col-sm-10 question-avatar">
-                <img src="{% static "img/photo.png" %}" alt="avatar">
-                <form>
-                    <div class="form-group">
-                        <input type="file" class="form-control-file" id="exampleFormControlFile1">
-                    </div>
-                </form>
-                <button type="submit" class="btn btn-primary" style="margin: 70px">Save</button>
-            </div>
-        </div>
+    <form method="POST">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% buttons %}
+        <button type="submit" class="btn btn-primary">Save changes</button>
+        {% endbuttons %}
     </form>
 </div>
 {% endblock content %}

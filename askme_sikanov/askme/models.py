@@ -6,7 +6,7 @@ from django.contrib.contenttypes.fields import GenericForeignKey
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     avatar = models.ImageField(upload_to='../static/css/img/', default='photo.png')
 
 
@@ -34,7 +34,7 @@ class QuestionManager(models.Manager):
 class Question(models.Model):
     title = models.CharField(max_length=255)
     text = models.TextField()
-    create_date = models.DateField()
+    create_date = models.DateTimeField(default=timezone.now)
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     tag = models.ManyToManyField(Tag)
     objects = QuestionManager()
@@ -49,7 +49,7 @@ class AnswerManager(models.Manager):
 class Answer(models.Model):
     text = models.TextField()
     correct = models.BooleanField()
-    create_date = models.DateField()
+    create_date = models.DateTimeField(default=timezone.now)
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     objects = AnswerManager()
@@ -64,4 +64,3 @@ class Like(models.Model):
 
     class Meta:
         unique_together = ('content_type', 'object_id', 'profile')
-    

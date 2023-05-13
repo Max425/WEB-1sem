@@ -1,25 +1,19 @@
 {% extends "inc/base.html" %}
+{% load bootstrap4 %}
+{% load static %}
 
 {% block content %}
 <h1 class="mt-5">Sign Up</h1>
 <div class="container">
-    <form>
-        {%  include "inc/input_form.html" with input_name="Login" style="placeholder='Enter your login'" %}
-        {%  include "inc/input_form.html" with input_name="Email" style="placeholder='Enter your email'" %}
-        {%  include "inc/input_form.html" with input_name="NickName" style="placeholder='Enter your nickname'" %}
-        {%  include "inc/input_form.html" with input_name="Password" style="placeholder='Enter your password'" %}
-        {%  include "inc/input_form.html" with input_name="Repeat password" style="placeholder='Repeat your password'" %}
-        <div class="form-group row">
-            <label for="input3" class="col-sm-2 col-form-label">Upload avatar</label>
-            <div class="col-sm-10 question-avatar">
-                <form>
-                    <div class="form-group">
-                        <input type="file" class="form-control-file" id="exampleFormControlFile1">
-                    </div>
-                </form>
-                <button type="submit" class="btn btn-primary" style="margin: 70px">Save</button>
-            </div>
-        </div>
+    <form action="/signup/" method="post">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        
+        {% buttons %}
+        <button type="submit" class="btn btn-primary">
+            Save
+        </button>
+        {% endbuttons %}
     </form>
 </div>
 {% endblock content %}
