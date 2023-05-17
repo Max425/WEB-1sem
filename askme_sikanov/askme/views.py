@@ -93,8 +93,7 @@ def login_view(request):
             user = authenticate(request, **login_form.cleaned_data)
             if user is not None:
                 login(request, user)
-                # return redirect(request.GET.get('continue') if request.GET.get('continue') != '' else reverse('index'))
-                return redirect(reverse('index'))
+                return redirect(request.GET.get('continue') if request.GET.get('continue') != '' else reverse('index'))
             else:
                 login_form.add_error(None, 'Invalid login or password.')
     else:

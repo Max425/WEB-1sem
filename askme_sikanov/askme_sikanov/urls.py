@@ -7,7 +7,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('question/<int:question_id>/', views.question, name="question"),
     path('ask/', views.ask, name="ask"),
-    path('logout/', views.logout, name="logout"),
+    path('logout/', views.logout_view, name="logout"),
     path('login/', views.login_view, name="login"),
     path('settings/', views.settings, name="settings"),
     path('signup/', views.signup, name="signup"),
