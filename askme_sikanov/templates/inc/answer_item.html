@@ -7,8 +7,8 @@
                 <img src="{% static "img/photo.png" %}" alt="avatar">
             </div>
             <div class="counter">
-                <input class="love-btn" data-id="{{ question.id }}" type="button" value="&#x2764;">
-                    <input class="counter-input"  type="text" value="{{ question.like }}" readonly>
+                <input class="love-btn" data-type="answer" data-id="{{ answer.id }}" type="button" value="&#x2764;">
+                    <input class="counter-input"  type="text" value="{{ answer.like }}" readonly>
                 </input>
             </div>
         </div>

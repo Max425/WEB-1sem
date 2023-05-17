@@ -25,7 +25,7 @@ $(".love-btn").on('click', function (ev) {
                 'X-CSRFToken': csrftoken,
                 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
             },
-            body: 'question_id=' + $(this).data('id'),
+            body: 'object_id=' + $(this).data('id') + '&type=' + $(this).data('type'),
         }
     );
 

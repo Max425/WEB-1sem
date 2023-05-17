@@ -144,19 +144,31 @@ def signup(request):
 @login_required()
 @require_POST
 def vote_up(request):
-    question_id = int(request.POST['question_id'])
+    object_id = request.POST.get('object_id')
+    type = request.POST.get('type')
+    type_obj = models.Question if type == 'question' else models.Answer
     try:
-        question = models.Question.objects.get(id=question_id)
-    except models.Question.DoesNotExist:
-        raise Http404("does not exist")
-    
-    with transaction.atomic():
-        question.like += 1
-        question.save()
+        obj = type_obj.objects.get(id=object_id)
+    except type_obj.DoesNotExist:
+        raise Http404("Question does not exist")
 
-    like = models.Like.objects.create(content_type=ContentType.objects.get_for_model(question), object_id=question_id, profile=request.user.profile)
-    like.save()
+    profile = request.user.profile
+
+    with transaction.atomic():
+        try:
+            like = models.Like.objects.get(content_type=ContentType.objects.get_for_model(obj),
+                                          object_id=object_id,
+                                          profile=profile)
+            like.delete()
+            obj.like -= 1
+        except models.Like.DoesNotExist:
+            like = models.Like.objects.create(content_type=ContentType.objects.get_for_model(obj),
+                                              object_id=object_id,
+                                              profile=profile)
+            obj.like += 1
+
+        obj.save()
 
     return JsonResponse({
-        'new_like': question.like
+        'new_like': obj.like
     })
