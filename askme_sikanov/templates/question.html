@@ -11,13 +11,17 @@
 {% endfor %}
 
 <hr class="bg-dark">
-<form method="post" action="{% url 'question' question.pk %}">
-  {% csrf_token %}
-  <div class="form-group">
-    {% bootstrap_form form %}
-  </div>
-  <button type="submit" class="btn btn-primary">Answer</button>
-</form>
+{% if not user.is_authenticated %}
+  <p>Чтобы ответить на вопрос, пожалуйста, <a href="{% url 'login' %}?continue={% url 'question' question.pk %}">войдите</a> или <a href="{% url 'signup' %}?continue={% url 'question' question.pk %}">зарегистрируйтесь</a>.</p>
+{% else %}
+  <form method="post" action="{% url 'question' question.pk %}">
+    {% csrf_token %}
+    <div class="form-group">
+      {% bootstrap_form form %}
+    </div>
+    <button type="submit" class="btn btn-primary">Answer</button>
+  </form>
+{% endif %}
 
 {% include "inc/paginator.html" with obj=page_obj %}
 
