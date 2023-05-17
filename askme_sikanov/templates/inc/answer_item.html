@@ -7,9 +7,9 @@
                 <img src="{% static "img/photo.png" %}" alt="avatar">
             </div>
             <div class="counter">
-                <button class="counter-btn" data-action="decrement">-</button>
-                <input class="counter-input" type="text" value="{{ answer.like }}">
-                <button class="counter-btn" data-action="increment">+</button>
+                <input class="love-btn" data-id="{{ question.id }}" type="button" value="&#x2764;">
+                    <input class="counter-input"  type="text" value="{{ question.like }}" readonly>
+                </input>
             </div>
         </div>
         <div class="col-9">

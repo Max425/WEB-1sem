@@ -15,6 +15,7 @@ urlpatterns = [
     path('signup/', views.signup, name="signup"),
     path('tag/<str:tag_name>/', views.tag, name="tag"),
     path('hot/', views.hot, name="hot"),
+    path('vote_up/', views.vote_up, name="vote_up"),
 ]
 
 if settings.DEBUG:

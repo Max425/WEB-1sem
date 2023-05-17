@@ -1,11 +1,13 @@
 from . import models
 from django.core.paginator import Paginator
-from django.http import Http404
+from django.contrib.contenttypes.models import ContentType
+from django.http import Http404, HttpResponse, JsonResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.views.decorators.http import require_http_methods
+from django.views.decorators.http import require_http_methods, require_POST
 from django.shortcuts import render, redirect
 from django.urls import reverse
+from django.db import transaction
 from askme.forms import *
 
 
@@ -103,8 +105,9 @@ def login_view(request):
 
 
 def logout_view(request):
+    next_url = request.META.get('HTTP_REFERER')
     logout(request)
-    return redirect(reverse('index'))
+    return redirect(next_url if next_url else reverse('index'))
 
 
 @login_required(login_url="login", redirect_field_name='continue')
@@ -136,3 +139,24 @@ def signup(request):
         user_form = RegistrationForm()
 
     return render(request, 'signup.html', {'form': user_form})
+
+
+@login_required()
+@require_POST
+def vote_up(request):
+    question_id = int(request.POST['question_id'])
+    try:
+        question = models.Question.objects.get(id=question_id)
+    except models.Question.DoesNotExist:
+        raise Http404("does not exist")
+    
+    with transaction.atomic():
+        question.like += 1
+        question.save()
+
+    like = models.Like.objects.create(content_type=ContentType.objects.get_for_model(question), object_id=question_id, profile=request.user.profile)
+    like.save()
+
+    return JsonResponse({
+        'new_like': question.like
+    })
