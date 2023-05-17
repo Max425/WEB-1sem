@@ -150,7 +150,7 @@ def vote_up(request):
     try:
         obj = type_obj.objects.get(id=object_id)
     except type_obj.DoesNotExist:
-        raise Http404("Question does not exist")
+        raise Http404("Does not exist")
 
     profile = request.user.profile
 
@@ -172,3 +172,23 @@ def vote_up(request):
     return JsonResponse({
         'new_like': obj.like
     })
+
+
+@login_required()
+@require_POST
+def is_correct(request):
+    answer_id = request.POST.get('answer_id')
+    try:
+        answer = models.Answer.objects.get(id=answer_id)
+    except models.Answer.DoesNotExist:
+        raise Http404("Answer does not exist")
+
+    profile = request.user.profile
+
+    if answer.profile == profile:
+        answer.correct = not answer.correct
+        answer.save()
+
+    return JsonResponse({
+        'is_correct': answer.correct
+    }) 

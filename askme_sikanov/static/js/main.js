@@ -15,7 +15,7 @@ function getCookie(name) {
 const csrftoken = getCookie('csrftoken');
 
 $(".love-btn").on('click', function (ev) {
-    const loveBtn = this; // Сохраняем ссылку на элемент .love-btn
+    const loveBtn = this; 
 
     const request = new Request(
         'http://127.0.0.1:8000/vote_up/',
@@ -36,3 +36,24 @@ $(".love-btn").on('click', function (ev) {
         });
 });
 
+$(".form-check-input").on('click', function (ev) {
+    const checkInput = this;
+
+    const request = new Request(
+        'http://127.0.0.1:8000/is_correct/',
+        {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': csrftoken,
+                'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+            },
+            body: 'answer_id=' + $(this).data('id'),
+        }
+    );
+
+    fetch(request)
+        .then(response_raw => response_raw.json())
+        .then(response_json => {
+            $(checkInput).prop('checked', response_json.correct);
+        });
+});
