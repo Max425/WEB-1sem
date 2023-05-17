@@ -112,7 +112,7 @@ def logout_view(request):
 def settings(request):
     user = request.user
     if request.method == 'POST':
-        form = SettingsForm(request.POST, instance=user)
+        form = SettingsForm(request.POST, files=request.FILES, instance=user)
         if form.is_valid():
             form.save()
             return redirect(reverse('index'))
@@ -121,9 +121,10 @@ def settings(request):
     return render(request, 'settings.html', {'form': form})
 
 
+@require_http_methods(['GET', 'POST'])
 def signup(request):
     if request.method == 'POST':
-        user_form = RegistrationForm(request.POST)
+        user_form = RegistrationForm(request.POST, files=request.FILES)
         if user_form.is_valid():
             user = user_form.save()
             if user is not None:

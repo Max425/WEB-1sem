@@ -6,7 +6,7 @@ from django.contrib.contenttypes.fields import GenericForeignKey
 
 
 class Profile(models.Model):
-    avatar = models.ImageField(upload_to='../media/avatars/%Y/%m/%d/', default='photo.png')
+    avatar = models.ImageField(blank=True, null=True, upload_to='media/avatars/%Y/%m/%d/', default='media/avatars/photo.png')
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
 
     def __str__(self):

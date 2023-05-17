@@ -1,6 +1,8 @@
 from django.contrib import admin
 from django.urls import path
 from askme import views
+from . import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('', views.index, name="index"),
@@ -14,3 +16,6 @@ urlpatterns = [
     path('tag/<str:tag_name>/', views.tag, name="tag"),
     path('hot/', views.hot, name="hot"),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
