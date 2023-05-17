@@ -3,6 +3,7 @@ from django.core.paginator import Paginator
 from django.http import Http404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_http_methods
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from askme.forms import *
@@ -23,6 +24,7 @@ def index(request):
     return render(request, 'index.html', context)
 
 
+@require_http_methods(['GET', 'POST'])
 def question(request, question_id):
     try:
         question = models.Question.objects.get(id=question_id)
@@ -70,7 +72,8 @@ def hot(request):
     return render(request, 'hot.html', context)
 
 
-@login_required(redirect_field_name='continue')
+@login_required(login_url="login", redirect_field_name='continue')
+@require_http_methods(['GET', 'POST'])
 def ask(request):
     if request.method == 'POST':
         form = QuestionForm(request.POST)
@@ -82,6 +85,7 @@ def ask(request):
     return render(request, 'ask.html', {'form': form})
 
 
+@require_http_methods(['GET', 'POST'])
 def login_view(request):
     if request.method == 'POST':
         login_form = LoginForm(request.POST)
@@ -103,7 +107,8 @@ def logout_view(request):
     return redirect(reverse('index'))
 
 
-@login_required(redirect_field_name='continue')
+@login_required(login_url="login", redirect_field_name='continue')
+@require_http_methods(['GET', 'POST'])
 def settings(request):
     user = request.user
     if request.method == 'POST':

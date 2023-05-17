@@ -6,14 +6,17 @@ from django.contrib.contenttypes.fields import GenericForeignKey
 
 
 class Profile(models.Model):
+    avatar = models.ImageField(upload_to='../media/avatars/%Y/%m/%d/', default='photo.png')
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
-    avatar = models.ImageField(upload_to='../static/css/img/', default='photo.png')
+
+    def __str__(self):
+        return f'{self.user.username}'
 
 
 class Tag(models.Model):
     name = models.CharField(max_length=255)
 
-    def __str__(self) -> str:
+    def __str__(self):
         return f'{self.name}'
 
 
