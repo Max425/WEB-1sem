@@ -18,7 +18,7 @@ def paginator(request, model, count):
 
 
 def index(request):
-    objects = models.Question.objects.all()
+    objects = models.Question.objects.by_date()
     context = {
         'page_obj': paginator(request, objects, 10),
         'questions': objects,

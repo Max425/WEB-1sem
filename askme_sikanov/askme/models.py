@@ -32,6 +32,9 @@ class QuestionManager(models.Manager):
     
     def get_by_tag(self, tag_name):
         return self.filter(tag__name=tag_name)
+    
+    def by_date(self):
+        return self.order_by('-create_date')
 
 
 class Question(models.Model):
