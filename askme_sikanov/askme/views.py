@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_http_methods, require_POST
 from django.shortcuts import render, redirect
 from django.urls import reverse
+from django.views.decorators.csrf import csrf_exempt
 from django.db import transaction
 from askme.forms import *
 
@@ -141,7 +142,8 @@ def signup(request):
     return render(request, 'signup.html', {'form': user_form})
 
 
-@login_required()
+@csrf_exempt
+# @login_required()
 @require_POST
 def vote_up(request):
     object_id = request.POST.get('object_id')
@@ -151,7 +153,6 @@ def vote_up(request):
         obj = type_obj.objects.get(id=object_id)
     except type_obj.DoesNotExist:
         raise Http404("Does not exist")
-
     profile = request.user.profile
 
     with transaction.atomic():
@@ -174,6 +175,7 @@ def vote_up(request):
     })
 
 
+@csrf_exempt
 @login_required()
 @require_POST
 def is_correct(request):

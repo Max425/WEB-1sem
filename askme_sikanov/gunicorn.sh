@@ -1,1 +1,1 @@
-gunicorn askme_sikanov.wsgi:app
+gunicorn askme_sikanov.wsgi:application
