@@ -143,7 +143,7 @@ def signup(request):
 
 
 @csrf_exempt
-# @login_required()
+@login_required()
 @require_POST
 def vote_up(request):
     object_id = request.POST.get('object_id')
