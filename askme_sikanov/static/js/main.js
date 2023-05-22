@@ -15,12 +15,17 @@ function getCookie(name) {
 const csrftoken = getCookie('csrftoken');
 
 $(".love-btn").on('click', function (ev) {
-    const loveBtn = this; 
+    const loveBtn = this;
 
     const request = new Request(
-        'http://127.0.0.1:8000/vote_up/',
+        'http://localhost:8000/vote_up/',
         {
             method: 'POST',
+            // credentials: 'include',
+            // crossDomain: true,
+            // xhrFields: {
+            //   withCredentials: true
+            // },
             headers: {
                 'X-CSRFToken': csrftoken,
                 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
@@ -40,7 +45,7 @@ $(".form-check-input").on('click', function (ev) {
     const checkInput = this;
 
     const request = new Request(
-        'http://127.0.0.1:8000/is_correct/',
+        'http://localhost:8000/is_correct/',
         {
             method: 'POST',
             headers: {

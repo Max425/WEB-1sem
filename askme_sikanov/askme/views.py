@@ -168,8 +168,9 @@ def vote_up(request):
             obj.like += 1
 
         obj.save()
-
     return JsonResponse({
+        # "Access-Control-Allow-Origin" : "*",
+        # "Access-Control-Allow-Headers" : "*",
         'new_like': obj.like
     })
 
