@@ -21,11 +21,6 @@ $(".love-btn").on('click', function (ev) {
         'http://localhost:8000/vote_up/',
         {
             method: 'POST',
-            // credentials: 'include',
-            // crossDomain: true,
-            // xhrFields: {
-            //   withCredentials: true
-            // },
             headers: {
                 'X-CSRFToken': csrftoken,
                 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
