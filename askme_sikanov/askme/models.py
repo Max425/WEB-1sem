@@ -1,20 +1,33 @@
 from django.utils import timezone
 from django.db import models
+from django.db.models import Count
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
 
+class ProfileManager(models.Manager):
+    def get_top_users_with_most_answers(self):
+        return self.annotate(num_answers=Count('user__answer')).order_by('-num_answers')[:5]
+    
 
 class Profile(models.Model):
     avatar = models.ImageField(blank=True, null=True, upload_to='media/avatars/%Y/%m/%d/', default='media/avatars/photo.png')
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
-
+    objects = ProfileManager()
+    
     def __str__(self):
         return f'{self.user.username}'
 
 
+class TagManager(models.Manager):
+    def get_top_tags_by_popularity(self):
+        top_tags = self.annotate(num_answers=Count('answer')).order_by('-num_answers')[:5]
+        return top_tags
+
+
 class Tag(models.Model):
     name = models.CharField(max_length=255)
+    objects = TagManager()
 
     def __str__(self):
         return f'{self.name}'

@@ -184,7 +184,7 @@ def is_correct(request):
 
     profile = request.user.profile
 
-    if answer.profile == profile:
+    if answer.question.profile == profile:
         answer.correct = not answer.correct
         answer.save()
 
