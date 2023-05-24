@@ -1,0 +1,1 @@
+gunicorn askme_sikanov.wsgi:application
