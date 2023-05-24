@@ -26,10 +26,13 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'localhost',
+    '127.0.0.1',
     'docker-web-1',
     # другие разрешенные хосты
 ]
 
+
+CORS_ALLOW_CREDENTIALS = True
 # Application definition
 
 INSTALLED_APPS = [
@@ -70,7 +73,6 @@ CSRF_TRUSTED_ORIGINS = [
     "http://127.0.0.1",
 ]
 
-CORS_ALLOW_CREDENTIALS = True
 
 ROOT_URLCONF = 'askme_sikanov.urls'
 
