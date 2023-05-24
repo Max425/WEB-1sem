@@ -142,7 +142,6 @@ def signup(request):
     return render(request, 'signup.html', {'form': user_form})
 
 
-# @csrf_exempt
 @login_required()
 @require_POST
 def vote_up(request):
